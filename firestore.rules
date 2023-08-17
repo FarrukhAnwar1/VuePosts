@@ -1,0 +1,47 @@
+rules_version = '2';
+
+service cloud.firestore {
+
+  match /databases/{database}/documents {
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+    
+    match /posts/{docId} {
+    	allow read;
+      allow create, update: if request.auth.uid == request.resource.data.authorUid;
+      allow delete: if request.auth.uid == resource.data.authorUid;
+    }
+    
+    match /tags/{docId} {
+    	allow read;
+      allow create, delete: if request.auth != null;
+    }
+    
+    match /likes/{docId} {
+    	allow read;
+      allow create: if request.auth.uid == request.resource.data.likerUid;
+      allow delete: if request.auth.uid == resource.data.likerUid;
+    }
+    
+    match /comments/{docId} {
+    	allow read;
+      allow create, update: if request.auth.uid == request.resource.data.commenterUid;
+      allow delete: if request.auth.uid == resource.data.commenterUid;
+    }
+    
+    match /userProfiles/{docId} {
+    	allow read;
+      allow create, update, delete: if request.auth.uid == docId;
+    }
+    
+    match /mentions/{docId} {
+    	allow read;
+      allow create, update: if request.auth.uid == request.resource.data.mentionerUid;
+      allow delete: if request.auth.uid == resource.data.mentionerUid;
+    }
+    
+    
+  }
+}
