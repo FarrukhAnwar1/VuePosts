@@ -40,7 +40,7 @@
             <button type = "button" class = "btn btn-dark" @click = "handleSignInButtonClick()">
                 <div>
                     Sign In With
-                    <img src = "https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" class = "google-logo">
+                    <img src = "https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" class = "google-logo">
                 </div>
             </button>
         </template>
